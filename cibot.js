@@ -64,7 +64,7 @@ class CIBOT extends ActivityHandler {
                             res.on('data', (chunk) => {
                                 data += chunk;
                             });
-                console.log(res);
+                
                             res.on('end', () => {
                                 resolve(JSON.parse(data));
                             });
