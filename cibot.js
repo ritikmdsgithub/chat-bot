@@ -1,6 +1,8 @@
 const { ActivityHandler, MessageFactory, ActionTypes, CardFactory } = require('botbuilder');
+
 const User = require('./database');
 const https = require('https');
+
 
 class CIBOT extends ActivityHandler {
     constructor() {
@@ -45,10 +47,9 @@ class CIBOT extends ActivityHandler {
                     await next();
                 }
             } else {
-                const userQuestion = context.activity.text.toLowerCase();
-
+                const userQuestion = context.activity.text.toLowerCase();                
                 const url = "https://3314-2401-4900-1c66-c3df-a4ca-c206-c5da-a227.ngrok-free.app/api/v1/prediction/1bf1fdca-50a0-4ca1-9301-d40ba5649aef";
-
+                
                 async function query(data) {
                     const options = {
                         method: 'POST',
@@ -56,7 +57,6 @@ class CIBOT extends ActivityHandler {
                             'Content-Type': 'application/json',
                         },
                     };
-                
                     return new Promise((resolve, reject) => {
                         const req = https.request(url, options, (res) => {
                             let data = '';
@@ -145,7 +145,7 @@ class CIBOT extends ActivityHandler {
     async promptForEmail(turnContext) {
         await turnContext.sendActivity(`What's your email?`);
     }
-    
+   
     async promptReEnterEmail(turnContext) {
         await turnContext.sendActivity(`Please enter valid email.`);
     }
